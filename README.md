@@ -10,11 +10,24 @@ This project is based on https://github.com/INDAPlus20/AssignmentsInstructions/t
 - The project is tracked and planned with github project tool.
 
 
-# Project TBD 
+# Project WebApp with dataanalysis (maybe Fast Fourier Transform)
 ## Project description
-This project will solve everything
+This project contains javascript webapplication for dataanalysis. The data in question are to be descided, two prominent options are analysis of musicsamples using Fast fourier transform or datavisualisation using data from relevant API.
+
+### Challenges
+- Create a feasible where each MVP will result in a usable application
+- Frontend/ interface 
+- Fast Fourier Transform - implementation and visualisation
+- Communication between different applications, backend and frontend
+- Git
+- Version controll in a group project
+- Planning workload
+
+#### Workstructure
+- One week sprints, issues are distributed equally between the different applications
+- One MVP per week or every other week
 
 ## Installation
-Description of how i run this on my computer
+Description of how i run this on my computer - TODO
 
 
