@@ -1,16 +1,23 @@
 import "./App.css";
-import Nora from './components/Nora'
+import Nora from "./components/Nora";
 
 function App() {
   return (
     <div className="App">
       <div className="test">
-        <p> Micke är cool</p>
-        <Nora />
-        <Nora />
-        <Nora />
-        <Nora />
-        <Nora />
+        <p> Clicka på Noras bubblor för att höra vad hon tänker!</p>
+        <div className="norasTankar">
+          <Nora noraSäger="Hej hej!" noraTänker="Hejdå" />
+          <Nora
+            noraSäger="Jag gillar Bananer!"
+            noraTänker="mmmm, Bananer...."
+          />
+          <Nora
+            noraSäger="Och solsken!"
+            noraTänker="Varför vara inne när man kan vara ute!"
+          />
+          <Nora noraSäger="Men inte sallad!" noraTänker="Usch för grönsaker!" />
+        </div>
       </div>
     </div>
   );

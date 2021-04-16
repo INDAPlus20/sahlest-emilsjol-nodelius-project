@@ -1,7 +1,16 @@
-function Nora(){
-    return(
-        <div onClick={()=>console.log("hello Nora")}> Nora är också bra</div>
-    )
+import "./Nora.css";
+
+function Nora(props) {
+  function callNora() {
+    console.log(props.noraTänker + "!!!!!!!!!!!!!!!");
+  }
+
+  return (
+    <div className="Nora" onClick={callNora}>
+      {" "}
+      {props.noraSäger}
+    </div>
+  );
 }
 
-export default Nora
+export default Nora;
