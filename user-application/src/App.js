@@ -1,5 +1,7 @@
 import "./App.css";
 import Nora from "./components/Nora";
+import AudioListener from "./components/AudioListener";
+
 
 function App() {
   return (
@@ -17,6 +19,11 @@ function App() {
             noraTänker="Varför vara inne när man kan vara ute!"
           />
           <Nora noraSäger="Men inte sallad!" noraTänker="Usch för grönsaker!" />
+        </div>
+
+        <div className="norasAudio">
+          <p>Noraas Audio</p>
+          <AudioListener/>
         </div>
       </div>
     </div>
