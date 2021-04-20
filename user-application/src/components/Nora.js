@@ -1,4 +1,4 @@
-import "./Nora.css";
+import React from 'react';
 
 function Nora(props) {
   function callNora() {

@@ -1,3 +1,4 @@
+import React from 'react';
 
 var stream = null;
 
@@ -26,11 +27,12 @@ function AudioListener(props) {
     }
 
     return (
-        <div className="AudioListener">
-            <button id="micButton" onClick={toggleMicrophone}>
+        <div className="audioListener">
+            <button className="micbutton" id="micButton" onClick={toggleMicrophone}>
                 {stream ? 'Stop recording' : 'Start recording'}
             </button>
         </div>
+
     );
 
 }

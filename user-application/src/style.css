@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    background-color: rgb(255, 255, 255);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0,0,0,0.19);
+    height: 100px;
+    background-color: rgb(137, 183, 253);
+    color: rgb(255, 255, 255);
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.audioListener {
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 15px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    margin: 0 10px 10px;
+
+}
+
+.micbutton {
+    box-shadow: 0 2px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
+    background-color: #ff0000; /* Green */
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 10px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 15em;
+}
+
+.micbutton:hover {
+    background: rgb(160, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
+.App {
+    text-align: center;
+
+}
+
+.test {
+    color: rgb(255, 255, 255);
+    margin-bottom: 15px;
+    background-color: rgb(99, 99, 99);
+    border-radius: 1em;
+    padding: 10px 0px;
+    margin: 0 10px 10px;
+}
+
+
+.Nora {
+    box-shadow: 0 4px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
+    color: black;
+    font-size: 18px;
+    background-color: rgb(169, 204, 255);
+    width: 50%;
+    margin: 0 0 10px 25%;
+    position:relative;
+    align-self: center;
+    border-radius: 15em;
+}
+
+.Nora:hover {
+    background: rgb(56, 88, 192);
+    color: black;
+
+}
+
+.norasTankar{
+    display:grid;
+    color: white;
+}
+
+
