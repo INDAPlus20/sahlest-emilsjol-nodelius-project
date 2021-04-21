@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="500mm"
+   height="500mm"
+   viewBox="0 0 500 500"
+   version="1.1"
+   id="svg40"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="project architecture.svg">
+  <defs
+     id="defs34">
+    <linearGradient
+       inkscape:collect="always"
+       id="303dasd3">
+      <stop
+         style="stop-color:#37abc8;stop-opacity:1;"
+         offset="0"
+         id="stop3042" />
+      <stop
+         style="stop-color:#37abc8;stop-opacity:0;"
+         offset="1"
+         id="stop3044" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient2951"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop2949" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient156">
+      <stop
+         style="stop-color:#008000;stop-opacity:1;"
+         offset="0"
+         id="stop152" />
+      <stop
+         style="stop-color:#008000;stop-opacity:0;"
+         offset="1"
+         id="stop154" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient156"
+       id="linearGradient158"
+       x1="-172.12158"
+       y1="82.853554"
+       x2="141.11832"
+       y2="271.54584"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.86786111,0,0,0.86786111,251.75114,24.999581)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#303dasd3"
+       id="linearGradient3047"
+       x1="316.98166"
+       y1="82.853554"
+       x2="578.37128"
+       y2="327.13791"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.86786111,0,0,0.86786111,19.630475,28.809811)" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="1070.9901"
+     inkscape:cy="556.16666"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     width="500mm"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata37">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Lager 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:url(#linearGradient3047);fill-opacity:1;stroke:#000000;stroke-width:0.229621"
+       id="rect110"
+       width="210.14925"
+       height="260.71497"
+       x="259.00577"
+       y="28.809818" />
+    <rect
+       style="fill:url(#linearGradient158);fill-opacity:1;stroke:#000000;stroke-width:0.229621"
+       id="rect110-3"
+       width="210.14925"
+       height="260.71497"
+       x="18.638559"
+       y="25.463488" />
+    <rect
+       style="fill:#d38d5f;stroke:#000000;stroke-width:0.184867"
+       id="rect96"
+       width="147.36523"
+       height="208.10715"
+       x="49.697842"
+       y="63.85247" />
+    <g
+       id="g83"
+       transform="matrix(0.58041951,0,0,0.58041951,58.36218,77.324218)">
+      <rect
+         style="fill:#cccccc;stroke:#000000;stroke-width:0.264583"
+         id="rect48"
+         width="187.6232"
+         height="24.321527"
+         x="8.2853556"
+         y="9.0871639" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="38.754082"
+         y="20.312483"
+         id="text52"><tspan
+           sodipodi:role="line"
+           x="38.754082"
+           y="20.312483"
+           style="stroke-width:0.264583"
+           id="tspan54">navbar</tspan></text>
+    </g>
+    <g
+       id="g78"
+       transform="matrix(0.58041951,0,0,0.58041951,58.09809,84.666073)">
+      <rect
+         style="fill:#cccccc;stroke:#000000;stroke-width:0.264583"
+         id="rect58"
+         width="184.41597"
+         height="133.63477"
+         x="9.8889723"
+         y="68.955536" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="56.66114"
+         y="118.13313"
+         id="text62"><tspan
+           sodipodi:role="line"
+           id="tspan60"
+           x="56.66114"
+           y="118.13313"
+           style="stroke-width:0.264583">visualisering</tspan></text>
+    </g>
+    <g
+       id="g73"
+       transform="matrix(0.58041951,0,0,0.58041951,58.36218,80.599004)">
+      <rect
+         style="fill:#cccccc;stroke:#000000;stroke-width:0.264583"
+         id="rect64"
+         width="182.81235"
+         height="18.976137"
+         x="9.8889723"
+         y="41.426773" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="48.108513"
+         y="51.315735"
+         id="text68"><tspan
+           sodipodi:role="line"
+           id="tspan66"
+           x="48.108513"
+           y="51.315735"
+           style="stroke-width:0.264583">ladda upp data eller fil</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:9.18483px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.229621"
+       x="48.096558"
+       y="46.339241"
+       id="text136"><tspan
+         sodipodi:role="line"
+         id="tspan134"
+         x="48.096558"
+         y="46.339241"
+         style="stroke-width:0.229621">frontend</tspan></text>
+    <g
+       id="g94"
+       transform="matrix(0.58041951,0,0,0.58041951,58.09809,88.733145)">
+      <rect
+         style="fill:#cccccc;stroke:#000000;stroke-width:0.264583"
+         id="rect85"
+         width="183.34689"
+         height="20.847023"
+         x="11.492589"
+         y="209.00476" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="60.402912"
+         y="220.76462"
+         id="text89"><tspan
+           sodipodi:role="line"
+           id="tspan87"
+           x="60.402912"
+           y="220.76462"
+           style="stroke-width:0.264583">visualiseringskontroll</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.39465px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.184867"
+       x="64.487183"
+       y="72.567619"
+       id="text100"><tspan
+         sodipodi:role="line"
+         id="tspan98"
+         x="64.487183"
+         y="72.567619"
+         style="stroke-width:0.184867">app</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:9.18483px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.229621"
+       x="325.34433"
+       y="53.396809"
+       id="text140"><tspan
+         sodipodi:role="line"
+         id="tspan138"
+         x="325.34433"
+         y="53.396809"
+         style="stroke-width:0.229621">backend</tspan></text>
+  </g>
+</svg>
