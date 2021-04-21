@@ -3,6 +3,7 @@ import Header from "./components/Header";
 
 import AudioListener from "./components/AudioListener";
 import EmilsTestKomponent from "./components/EmilsTestKomponent";
+import Dropzone from "./components/Dropzone"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Test/>
       <EmilsTestKomponent EmilsTestFunktion = {EmilsTestFunktionHandler}/>
       <AudioListener/>
+      <Dropzone />
     </div>
   );
 }
