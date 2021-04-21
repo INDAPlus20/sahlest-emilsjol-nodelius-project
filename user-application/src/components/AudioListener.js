@@ -1,40 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
+import AudioAnalyser from './AudioAnalyser';
 
-var stream = null;
 
-function AudioListener(props) {
+class AudioListener extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        audio : null
+      }
+      this.toggleMicrophone = this.toggleMicrophone.bind(this)
+    }
 
-    async function getMicrophone() {
-        stream = await navigator.mediaDevices.getUserMedia( {
+    async getMicrophone() {
+        const audio = await navigator.mediaDevices.getUserMedia( {
             audio : true,
             video : false
         });
+        this.setState({ audio });
     }
 
-    function stopMicrophone() {
-        stream.getAudioTracks().forEach(track => track.stop());
-        stream = null;
+    stopMicrophone() {
+        this.state.audio.getAudioTracks().forEach(track => track.stop());
+        this.setState({ audio : null });
     }
 
-    function toggleMicrophone() {
-        if (stream) {
-            stopMicrophone();
-            document.querySelector("#micButton").innerText = "Start recording";
+    toggleMicrophone() {
+        if (this.state.audio) {
+            this.stopMicrophone();
         } else {
-            getMicrophone();
-            document.querySelector("#micButton").innerText = "Stop recording";
+            this.getMicrophone();
         }
     }
 
-    return (
-        <div className="audioListener">
-            <button className="micbutton" id="micButton" onClick={toggleMicrophone}>
-                {stream ? 'Stop recording' : 'Start recording'}
-            </button>
-        </div>
-
-    );
-
+    render() {
+        return (
+            <div>
+                <div className="audioListener">
+                    <button className="micbutton" id="micButton" onClick={this.toggleMicrophone}>
+                        {this.state.audio ? 'Stop recording' : 'Start recording'}
+                    </button>
+                </div>
+                {this.state.audio ? <AudioAnalyser audio= {this.state.audio}/> : ""}
+            </div>
+        );    
+    }
 }
 
 export default AudioListener;
