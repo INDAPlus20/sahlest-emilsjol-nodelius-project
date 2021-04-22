@@ -13,22 +13,6 @@ code {
     monospace;
 }
 
-.navbar {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0,0,0,0.19);
-    height: 100px;
-    background-color: #14213D;
-    color: #FFFFFF;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .audioListener {
     background-color: rgb(255, 255, 255);
     margin-bottom: 15px;
