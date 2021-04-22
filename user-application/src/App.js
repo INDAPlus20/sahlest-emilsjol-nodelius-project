@@ -1,19 +1,12 @@
 import { Route, Switch } from "react-router-dom";
 
-import Test from "./components/Test";
 import Navbar from "./components/UI/Navbar";
 
-import AudioListener from "./components/AudioListener";
-import EmilsTestKomponent from "./components/EmilsTestKomponent";
-import Dropzone from "./components/Dropzone";
 import HomeScreen from "./components/Pages/HomeScreen";
 import AudioRecording from "./components/Pages/AudioRecording";
+import FileAnalyzer from "./components/Pages/FileAnalyzer";
 
 function App() {
-  const EmilsTestFunktionHandler = () => {
-    console.log("Emils testfunktion kördes");
-  };
-
   return (
     <div className="App">
       <Navbar />
@@ -25,12 +18,11 @@ function App() {
           <Route path="/AudioRecording">
             <AudioRecording />
           </Route>
+          <Route path="/FileAnalyzer">
+            <FileAnalyzer />
+          </Route>
         </Switch>
       </main>
-      {/* <Test/>
-      <EmilsTestKomponent EmilsTestFunktion = {EmilsTestFunktionHandler}/>
-      <AudioListener/>
-      <Dropzone /> */}
     </div>
   );
 }

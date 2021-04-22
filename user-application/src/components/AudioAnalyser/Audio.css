@@ -1,0 +1,30 @@
+.audioListener {
+    width: 50%;
+    margin-left: 25%;;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 15px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+}
+
+
+.micbutton {
+    box-shadow: 0 2px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
+    background-color: #ff0000; /* Green */
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 10px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 15em;
+}
+
+.micbutton:hover {
+    background: rgb(253, 119, 119);
+    color: rgb(255, 255, 255);
+}

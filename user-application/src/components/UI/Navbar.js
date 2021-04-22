@@ -14,6 +14,9 @@ function Navbar() {
           <li>
             <NavLink activeClassName={styles.active} to="/AudioRecording">Audio Recording</NavLink>
           </li>
+          <li>
+            <NavLink activeClassName={styles.active} to="/FileAnalyzer">File Analyzer</NavLink>
+          </li>
         </ul>
       </nav>
     </header>
