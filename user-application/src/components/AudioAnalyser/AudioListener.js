@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AudioAnalyser from './AudioAnalyser';
 
+import './Audio.css'
 
 class AudioListener extends Component {
     constructor(props) {

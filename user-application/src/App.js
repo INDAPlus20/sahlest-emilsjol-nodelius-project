@@ -1,23 +1,28 @@
-import Test from "./components/Test";
-import Header from "./components/Header";
+import { Route, Switch } from "react-router-dom";
 
-import AudioListener from "./components/AudioListener";
-import EmilsTestKomponent from "./components/EmilsTestKomponent";
-import Dropzone from "./components/Dropzone"
+import Navbar from "./components/UI/Navbar";
+
+import HomeScreen from "./components/Pages/HomeScreen";
+import AudioRecording from "./components/Pages/AudioRecording";
+import FileAnalyzer from "./components/Pages/FileAnalyzer";
 
 function App() {
-
-  const EmilsTestFunktionHandler = () => {
-    console.log("Emils testfunktion kördes")
-  }
-
   return (
     <div className="App">
-      <Header/>
-      <Test/>
-      <EmilsTestKomponent EmilsTestFunktion = {EmilsTestFunktionHandler}/>
-      <AudioListener/>
-      <Dropzone />
+      <Navbar />
+      <main>
+        <Switch>
+          <Route path="/" exact>
+            <HomeScreen />
+          </Route>
+          <Route path="/AudioRecording">
+            <AudioRecording />
+          </Route>
+          <Route path="/FileAnalyzer">
+            <FileAnalyzer />
+          </Route>
+        </Switch>
+      </main>
     </div>
   );
 }

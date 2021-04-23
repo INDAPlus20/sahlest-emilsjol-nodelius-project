@@ -13,87 +13,9 @@ code {
     monospace;
 }
 
-.navbar {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0,0,0,0.19);
-    height: 100px;
-    background-color: #14213D;
-    color: #FFFFFF;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.audioListener {
-    background-color: rgb(255, 255, 255);
-    margin-bottom: 15px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1em;
-    margin: 0 10px 10px;
-}
-
-.micbutton {
-    box-shadow: 0 2px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
-    background-color: #ff0000; /* Green */
-    border: none;
-    color: rgb(255, 255, 255);
-    padding: 10px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    border-radius: 15em;
-}
-
-.micbutton:hover {
-    background: rgb(253, 119, 119);
-    color: rgb(255, 255, 255);
-}
 
 .App {
     text-align: center;
 
 }
-
-.test {
-    color: #14213D;
-    margin-bottom: 15px;
-    background-color: #FFFFFF;
-    border-radius: 1em;
-    padding: 10px 0px;
-    margin: 0 10px 10px;
-}
-
-
-.Nora {
-    box-shadow: 0 4px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
-    color: #14213D;
-    font-size: 18px;
-    background-color: #FDB849;
-    width: 50%;
-    margin: 0 0 10px 25%;
-    position:relative;
-    align-self: center;
-    border-radius: 15em;
-}
-
-.Nora:hover {
-    background: #ffc973;
-    color: black;
-
-}
-
-.norasTankar{
-    display:grid;
-    color: white;
-}
-
 
