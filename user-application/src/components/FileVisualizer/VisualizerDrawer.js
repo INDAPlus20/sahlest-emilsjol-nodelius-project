@@ -18,6 +18,8 @@ function VisualizerDrawer() {
         ctx.fillRect(i, 0, 4, i)
        }
 
+       console.log("VisualizerDrawer.js was called");
+
 }
 
 export default VisualizerDrawer;
