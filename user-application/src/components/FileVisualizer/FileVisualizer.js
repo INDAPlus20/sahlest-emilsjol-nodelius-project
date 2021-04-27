@@ -8,9 +8,7 @@ function FileVisualizer() {
 
     return (
         <div>
-          <section className="container">
             <VisualizerDrawer />
-          </section>
         </div>
       );
 }
