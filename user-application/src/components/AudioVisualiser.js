@@ -7,6 +7,7 @@ class AudioVisualiser extends Component {
         this.canvas = React.createRef();
     }
 
+    
     draw() {
         const {audioData} = this.props;
         const canvas = this.canvas.current;
