@@ -24,30 +24,35 @@ const Canvas = (props) => {
     drawArray(ctx, mtrx[row]);
   };
   
-  var matrix = [];
-  for (let i = 0; i < 100; i++) {
-    matrix[i] = [];
-    for (let j = 0; j < 100; j++) {
-      matrix[i][j] = Math.floor(Math.random() * 100);
-    }
-  }
-  
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     let row = 0;
     let animationFrameId;
+
+    const mtrx = [];
+    for (let i = 0; i < 10; i++) {
+      mtrx[i] = [];
+      for (let j = 0; j < 10; j++) {
+        mtrx[i][j] = Math.floor(Math.random() * 100);
+      }
+    }
     
     const render = () => {
       //börja om från början
-      if (row > matrix.length) {
+      if (row >= mtrx.length) {
         row = 0;
       }
-      
+
       context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-      animation(context, matrix, row);
+      if (row >= mtrx.length) {
+        return <canvas ref={canvasRef} width="500" height="500" {...props} />;
+      }
+      animation(context, mtrx, row);
       row++;
-      animationFrameId = window.requestAnimationFrame(render);
+      //avkommentera för att starta animation, obs att cpu går till 100% och sidan hänger sig
+      //kommentera, spara, och ändra URL:en till http://localhost:3000/ för att komma loss
+      //animationFrameId = window.requestAnimationFrame(render);
     };
     render();
     
