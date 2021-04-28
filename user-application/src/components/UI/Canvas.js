@@ -8,6 +8,7 @@ It's based on this article:  https://medium.com/@pdx.lucasm/canvas-with-react-js
 const Canvas = (props) => {
   const canvasRef = useRef(null);
 
+  //För demosyfte
   const drawRectangle = (ctx) => {
     ctx.fillStyle = "#000000";
     ctx.beginPath();
@@ -15,6 +16,7 @@ const Canvas = (props) => {
     ctx.fill();
   };
 
+  //För demosyfte
   const drawTriangle = (ctx) => {
     ctx.beginPath();
     ctx.moveTo(125, 125);
@@ -27,13 +29,14 @@ const Canvas = (props) => {
   const drawArray = (ctx, arr) => {
     let max_y = ctx.canvas.height;
     let max_x = ctx.canvas.width;
-    let width = 10;
+    let width = max_x / arr.length;
     for (let i = 0; i < arr.length; i++) {
       ctx.rect(i * width, max_y - (arr[i] * 5), width, arr[i] * 5);
       ctx.fill();
     }
   };
 
+  //Möjligt alternativ till att använda drawArray flera gånger
   const drawMatrix = (ctx, mtrx) => {
     for (let i = 0; i < mtrx.length; i++) {
       for (let j = 0; j < mtrx[i].length; j++) {
@@ -59,13 +62,15 @@ const Canvas = (props) => {
     let frameCount = 0;
     let animationFrameId;
 
+    //Möjligt alternativ till att använda drawArray flera gånger
+    /*
     var matrix = [];
     for (let i = 0; i < 100; i++) {
       matrix[i] = [];
       for (let j = 0; j < 100; j++) {
         matrix[i][j] = j;
       }
-    }
+    } */
     
     const render = () => {
       frameCount++;
