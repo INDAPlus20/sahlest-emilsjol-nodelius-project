@@ -18,17 +18,15 @@ class AudioVisualiser extends Component {
         const sliceWidth = (width * 1.0)/frequencyData.length;
 
         context.lineWidth = 2;
-        context.strokeStyle = '#000000';
+        context.strokeStyle = 'blue';
         context.clearRect(0,0,width, height);
         context.beginPath();
-        context.moveTo(0, height/2);
 
         for (const item of frequencyData) {
-            const y = (item/255.0)*height;
-            context.lineTo(x, y);
+            context.moveTo(x, height);
+            context.lineTo(x, height-item);
             x += sliceWidth;
         }
-        context.lineTo(x, height / 2);
         context.stroke();
     }
 
