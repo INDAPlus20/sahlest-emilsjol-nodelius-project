@@ -7,59 +7,58 @@ It's based on this article:  https://medium.com/@pdx.lucasm/canvas-with-react-js
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
-  
-  const drawArray = (ctx, arr) => {
-    let max_y = ctx.canvas.height;
-    let max_x = ctx.canvas.width;
-    let width = max_x / arr.length;
-    for (let i = 0; i < arr.length; i++) {
-      ctx.rect(i * width, max_y - (arr[i] * 5), width, arr[i] * 5);
-      ctx.fill();
+  let framesPerSecond = 5;
+  let runAnimation = true;
+
+  let arry = new Array(10);
+  for (let index = 0; index < 10; index++) {
+    arry[index] = Math.floor(Math.random()*500)
+  }
+
+  const drawRect = (ctx, height, pos) => {
+    ctx.fillStyle = "#000000";
+    ctx.beginPath();
+    ctx.rect(pos, 500, 100, -height);
+    ctx.fill();
+  };
+
+  const drawArray = (ctx, frameCount, arr) => {
+    for(const [i, barHeight] of arr.entries()){
+      drawRect(ctx, (barHeight*frameCount)%500, i*50)
     }
-  };
+  }
+
   
-  // Since we want the function to self trigger a render, we want to dissable the warning
+  //? Since we want the function to self trigger a render, we want to dissable the warning
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const animation = (ctx, mtrx, row) => {
-    drawArray(ctx, mtrx[row]);
+  const animation = (ctx, frameCount) => {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    drawArray(ctx, frameCount, arry)
+    // drawRect(ctx, (frameCount * Math.random()) % 500, 100);
+    // drawRect(ctx, frameCount % 500, 250);
   };
-  
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    let row = 0;
+    let frameCount = 0;
     let animationFrameId;
 
-    const mtrx = [];
-    for (let i = 0; i < 10; i++) {
-      mtrx[i] = [];
-      for (let j = 0; j < 10; j++) {
-        mtrx[i][j] = Math.floor(Math.random() * 100);
-      }
-    }
-    
     const render = () => {
-      //börja om från början
-      if (row >= mtrx.length) {
-        row = 0;
+      if (runAnimation) {
+        setTimeout(() => {
+          frameCount++;
+          animation(context, frameCount);
+          animationFrameId = window.requestAnimationFrame(render);
+        }, 1000 / framesPerSecond);
       }
-
-      context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-      if (row >= mtrx.length) {
-        return <canvas ref={canvasRef} width="500" height="500" {...props} />;
-      }
-      animation(context, mtrx, row);
-      row++;
-      //avkommentera för att starta animation, obs att cpu går till 100% och sidan hänger sig
-      //kommentera, spara, och ändra URL:en till http://localhost:3000/ för att komma loss
-      //animationFrameId = window.requestAnimationFrame(render);
     };
+
     render();
-    
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [animation]);
+  }, [animation, runAnimation, framesPerSecond]);
 
   return <canvas ref={canvasRef} width="500" height="500" {...props} />;
 };
