@@ -1,7 +1,6 @@
 import React from "react";
 import Dropzone from '../Dropzone/Dropzone';
 import FileVisualizer from '../FileVisualizer/FileVisualizer';
-//import VisualizerDrawer from '../FileVisualizer/VisualizerDrawer';
 
 function FileAnalyzer() {
   return (

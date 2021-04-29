@@ -1,14 +1,9 @@
-import VisualizerDrawer from './VisualizerDrawer'
+import Canvas from '../UI/Canvas';
 
 function FileVisualizer() {
-  //! Du kan alltid köra dina funktioner innan du returnerar något som ska renderas på skärmen
-  //! Detta blir då din constructor
-
-  //VisualizerDrawer()
-
     return (
         <div>
-            <VisualizerDrawer />
+            <Canvas />
         </div>
       );
 }

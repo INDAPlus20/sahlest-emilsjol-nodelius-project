@@ -7,7 +7,7 @@ It's based on this article:  https://medium.com/@pdx.lucasm/canvas-with-react-js
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
-  let framesPerSecond = 10;
+  let framesPerSecond = 5;
   let runAnimation = true;
 
   //Läste i en tutorial att det är bättre att skriva 'let arry = [];' än 'let arry = new Array(x);'
@@ -39,6 +39,7 @@ const Canvas = (props) => {
   }
   
   //ogillar att mtrx måste tas som argument men behövs för att längden på staplarna ska följa canvas-storleken
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const animation = (ctx, frameCount, mtrx) => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     drawArray(ctx, frameCount, mtrx);
@@ -52,7 +53,7 @@ const Canvas = (props) => {
     let frameCount = 0;
     let animationFrameId;
     //matrisgenererandet behöver vara här för att följa storleken på canvas
-    let mtrx = generateMatrix(100, 100, context);
+    let mtrx = generateMatrix(10, 10, context);
     const render = () => {
       if (runAnimation) {
         setTimeout(() => {
