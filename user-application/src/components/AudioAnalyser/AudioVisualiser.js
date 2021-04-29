@@ -10,22 +10,29 @@ class AudioVisualiser extends Component {
     
     draw() {
         const {frequencyData} = this.props;
-        const canvas = this.canvas.current;
-        const height = canvas.height;
-        const width = canvas.width;
-        const context = canvas.getContext('2d');
+        const canvas1 = this.canvas.current;
+        const height = canvas1.height;
+        const width = canvas1.width;
+        const context = canvas1.getContext('2d');
         let x = 0;
-        const sliceWidth = (width * 1.0)/frequencyData.length;
+        const sliceWidth = (width * 2.0)/frequencyData.length;
 
         context.lineWidth = 2;
         context.strokeStyle = 'blue';
         context.clearRect(0,0,width, height);
         context.beginPath();
 
-        for (const item of frequencyData) {
-            context.moveTo(x, height);
-            context.lineTo(x, height-item);
-            x += sliceWidth;
+        var n = frequencyData.length;
+
+        console.log(frequencyData[0]);
+
+
+        for (var i = 1; i<n/2 + 1; i++) {
+            if (frequencyData[i]>0) {
+                context.moveTo(x, height);
+                context.lineTo(x, height-frequencyData[i]);            
+            }
+            x += (sliceWidth);
         }
         context.stroke();
     }
@@ -35,7 +42,7 @@ class AudioVisualiser extends Component {
       }
 
     render() {
-        return <canvas width="1200" height="500" ref={this.canvas}/>
+        return <canvas width="1024" height="500" ref={this.canvas}/>
     }
 }
 

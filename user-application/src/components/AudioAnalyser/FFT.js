@@ -24,26 +24,18 @@ class AudioAnalyser extends Component {
 
     analyse() {
         this.analyser.getByteTimeDomainData(this.dataArray);
-        var sr = this.audioContext.sampleRate;
-        console.log(sr);
-
         var w = exp(complex(0, -2*pi / this.n));
 
+        // frequencies
         var frequencies = fft(this.dataArray, w);
 
         var testArray = new Array(this.n)
         for (var i =0; i< this.n; i++) {
-            var f = abs(frequencies[i]);
-            if (f < 100) {
-                testArray[i] = 0;
 
-            } else {
-                testArray[i] = f;
-            }
+            // power spectral density
+            var f = frequencies[i].re*frequencies[i].re + frequencies[i].im*frequencies[i].im;
+            testArray[i] = f/this.n;
         }
-
-
-
 
         this.setState({ frequencyData : testArray });
         this.rafId = requestAnimationFrame(this.analyse);
