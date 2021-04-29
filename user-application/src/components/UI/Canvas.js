@@ -7,7 +7,7 @@ It's based on this article:  https://medium.com/@pdx.lucasm/canvas-with-react-js
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
-  let framesPerSecond = 20;
+  let framesPerSecond = 10;
   let runAnimation = true;
 
   //Läste i en tutorial att det är bättre att skriva 'let arry = [];' än 'let arry = new Array(x);'
