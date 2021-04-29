@@ -10,34 +10,39 @@ const Canvas = (props) => {
   let framesPerSecond = 5;
   let runAnimation = true;
 
-  let arry = new Array(10);
-  for (let index = 0; index < 10; index++) {
-    arry[index] = Math.floor(Math.random()*500)
-  }
-
-  const drawRect = (ctx, height, pos) => {
-    ctx.fillStyle = "#000000";
-    ctx.beginPath();
-    ctx.rect(pos, 500, 100, -height);
-    ctx.fill();
-  };
-
-  const drawArray = (ctx, frameCount, arr) => {
-    for(const [i, barHeight] of arr.entries()){
-      drawRect(ctx, (barHeight*frameCount)%500, i*50)
+  //Läste i en tutorial att det är bättre att skriva 'let arry = [];' än 'let arry = new Array(x);'
+  //Tänk att den här matrisen är fft-datan från backend
+  let n = 100;
+  let mtrx = [];
+  for (let i = 0; i < n; i++) {
+    mtrx[i] = [];
+    for (let j = 0; j < n; j++) {
+      mtrx[i][j] = Math.floor(Math.random()*500);
     }
   }
 
-  
-  //? Since we want the function to self trigger a render, we want to dissable the warning
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const animation = (ctx, frameCount) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    drawArray(ctx, frameCount, arry)
-    // drawRect(ctx, (frameCount * Math.random()) % 500, 100);
-    // drawRect(ctx, frameCount % 500, 250);
+  const drawRect = (ctx, pos, width, height) => {
+    ctx.fillStyle = "#000000";
+    ctx.beginPath();
+    ctx.rect(pos, ctx.canvas.height, width, -height);
+    ctx.fill();
   };
 
+  const drawArray = (ctx, frameCount, mtrx) => {
+    let currentRow = frameCount % n;
+    let width = ctx.canvas.width / mtrx[currentRow].length;
+    for(const [i, barHeight] of mtrx[currentRow].entries()){
+      drawRect(ctx, i*width, width, barHeight)
+    }
+  }
+  
+  const animation = (ctx, frameCount) => {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    drawArray(ctx, frameCount, mtrx);
+  };
+
+  //körs varje gång animation, runAnimation eller framesPerSecond ändras
+  //uppdaterar alltså sig själv -> animation
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -50,6 +55,7 @@ const Canvas = (props) => {
           frameCount++;
           animation(context, frameCount);
           animationFrameId = window.requestAnimationFrame(render);
+          
         }, 1000 / framesPerSecond);
       }
     };
