@@ -7,18 +7,20 @@ It's based on this article:  https://medium.com/@pdx.lucasm/canvas-with-react-js
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
-  let framesPerSecond = 5;
+  let framesPerSecond = 20;
   let runAnimation = true;
 
   //Läste i en tutorial att det är bättre att skriva 'let arry = [];' än 'let arry = new Array(x);'
   //Tänk att den här matrisen är fft-datan från backend
-  let n = 100;
-  let mtrx = [];
-  for (let i = 0; i < n; i++) {
-    mtrx[i] = [];
-    for (let j = 0; j < n; j++) {
-      mtrx[i][j] = Math.floor(Math.random()*500);
+  function generateMatrix(n, m, ctx) {
+    let mtrx = [];
+    for (let i = 0; i < n; i++) {
+      mtrx[i] = [];
+      for (let j = 0; j < m; j++) {
+        mtrx[i][j] = Math.floor(Math.random()*(ctx.canvas.height));
+      }
     }
+    return mtrx;
   }
 
   const drawRect = (ctx, pos, width, height) => {
@@ -29,33 +31,34 @@ const Canvas = (props) => {
   };
 
   const drawArray = (ctx, frameCount, mtrx) => {
-    let currentRow = frameCount % n;
+    let currentRow = frameCount % mtrx.length;
     let width = ctx.canvas.width / mtrx[currentRow].length;
     for(const [i, barHeight] of mtrx[currentRow].entries()){
       drawRect(ctx, i*width, width, barHeight)
     }
   }
   
-  const animation = (ctx, frameCount) => {
+  //ogillar att mtrx måste tas som argument men behövs för att längden på staplarna ska följa canvas-storleken
+  const animation = (ctx, frameCount, mtrx) => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     drawArray(ctx, frameCount, mtrx);
   };
 
   //körs varje gång animation, runAnimation eller framesPerSecond ändras
-  //uppdaterar alltså sig själv -> animation
+  //uppdaterar alltså sig själv vilket leder till animeringen
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     let frameCount = 0;
     let animationFrameId;
-
+    //matrisgenererandet behöver vara här för att följa storleken på canvas
+    let mtrx = generateMatrix(100, 100, context);
     const render = () => {
       if (runAnimation) {
         setTimeout(() => {
           frameCount++;
-          animation(context, frameCount);
+          animation(context, frameCount, mtrx);
           animationFrameId = window.requestAnimationFrame(render);
-          
         }, 1000 / framesPerSecond);
       }
     };
@@ -66,7 +69,7 @@ const Canvas = (props) => {
     };
   }, [animation, runAnimation, framesPerSecond]);
 
-  return <canvas ref={canvasRef} width="500" height="500" {...props} />;
+  return <canvas ref={canvasRef} width="1200" height="650" {...props} />;
 };
 
 export default Canvas;
