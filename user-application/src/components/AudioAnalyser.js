@@ -21,6 +21,7 @@ class AudioAnalyser extends Component {
     }
 
     tick() {
+        console.log(this.dataArray);
         this.analyser.getByteTimeDomainData(this.dataArray);
         this.setState({ audioData : this.dataArray });
         this.rafId = requestAnimationFrame(this.tick);

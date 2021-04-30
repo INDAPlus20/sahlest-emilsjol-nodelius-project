@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AudioAnalyser from './AudioAnalyser';
+import AudioAnalyser from './FFT';
 
 import './Audio.css'
 

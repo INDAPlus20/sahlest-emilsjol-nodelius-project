@@ -7,27 +7,33 @@ class AudioVisualiser extends Component {
         this.canvas = React.createRef();
     }
 
+    
     draw() {
-        const {audioData} = this.props;
-        const canvas = this.canvas.current;
-        const height = canvas.height;
-        const width = canvas.width;
-        const context = canvas.getContext('2d');
+        const {frequencyData} = this.props;
+        const canvas1 = this.canvas.current;
+        const height = canvas1.height;
+        const width = canvas1.width;
+        const context = canvas1.getContext('2d');
         let x = 0;
-        const sliceWidth = (width * 1.0)/audioData.length;
+        const sliceWidth = (width * 2.0)/frequencyData.length;
 
         context.lineWidth = 2;
-        context.strokeStyle = '#000000';
+        context.strokeStyle = 'blue';
         context.clearRect(0,0,width, height);
         context.beginPath();
-        context.moveTo(0, height/2);
 
-        for (const item of audioData) {
-            const y = (item/255.0)*height;
-            context.lineTo(x, y);
-            x += sliceWidth;
+        var n = frequencyData.length;
+
+        console.log(frequencyData[0]);
+
+
+        for (var i = 1; i<n/2 + 1; i++) {
+            if (frequencyData[i]>0) {
+                context.moveTo(x, height);
+                context.lineTo(x, height-frequencyData[i]);            
+            }
+            x += (sliceWidth);
         }
-        context.lineTo(x, height / 2);
         context.stroke();
     }
 
@@ -36,7 +42,7 @@ class AudioVisualiser extends Component {
       }
 
     render() {
-        return <canvas width="1200" height="500" ref={this.canvas}/>
+        return <canvas width="1024" height="500" ref={this.canvas}/>
     }
 }
 
