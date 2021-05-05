@@ -17,6 +17,9 @@ function Navbar() {
           <li>
             <NavLink activeClassName={styles.active} to="/FileAnalyzer">File Analyzer</NavLink>
           </li>
+          <li>
+            <NavLink activeClassName={styles.active} to="/Chatbot">Chatbot</NavLink>
+          </li>
         </ul>
       </nav>
     </header>
