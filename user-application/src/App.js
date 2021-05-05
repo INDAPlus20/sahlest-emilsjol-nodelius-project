@@ -5,6 +5,7 @@ import Navbar from "./components/UI/Navbar";
 import HomeScreen from "./components/Pages/HomeScreen";
 import AudioRecording from "./components/Pages/AudioRecording";
 import FileAnalyzer from "./components/Pages/FileAnalyzer";
+import Chatbot from "./components/Pages/Chatbot";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path="/FileAnalyzer">
             <FileAnalyzer />
+          </Route>
+          <Route path="/Chatbot">
+            <Chatbot />
           </Route>
         </Switch>
       </main>
