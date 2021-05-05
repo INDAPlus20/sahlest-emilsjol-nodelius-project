@@ -13,7 +13,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
  
 func MessageList(w http.ResponseWriter, r *http.Request) {
-    todos := Messages{
+    messages := Messages{
         Message{Author: "Mikael", Text: "Hey Handsome, how are you doin?"},
         Message{Author: "Emil", Text: "Doing fine!"},
     }
@@ -22,7 +22,7 @@ func MessageList(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Access-Control-Allow-Origin", "*")
     w.WriteHeader(http.StatusOK)
  
-    if err := json.NewEncoder(w).Encode(todos); err != nil {
+    if err := json.NewEncoder(w).Encode(messages); err != nil {
         panic(err)
     }
 }
@@ -33,3 +33,4 @@ func ShowMessages(w http.ResponseWriter, r *http.Request) {
     messageId := vars["messageId"]
     fmt.Fprintln(w, "Show Messages:", messageId)
 }
+
