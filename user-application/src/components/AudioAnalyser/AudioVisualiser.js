@@ -7,34 +7,39 @@ class AudioVisualiser extends Component {
         this.canvas = React.createRef();
     }
 
-    
     draw() {
         const {frequencyData} = this.props;
         const canvas1 = this.canvas.current;
         const height = canvas1.height;
         const width = canvas1.width;
         const context = canvas1.getContext('2d');
-        let x = 0;
         const sliceWidth = (width * 2.0)/frequencyData.length;
+        const upperLimit = 2500;
 
-        context.lineWidth = 2;
-        context.strokeStyle = 'blue';
-        context.clearRect(0,0,width, height);
-        context.beginPath();
+        context.clearRect(0, 0, width, height);
 
         var n = frequencyData.length;
 
         console.log(frequencyData[0]);
 
+        const drawRect = (ctx, pos, width, height, colour) => {
+            ctx.fillStyle = colour;
+            ctx.beginPath();
+            ctx.rect(pos, ctx.canvas.height, width, -height);
+            ctx.fill();
+          };
 
         for (var i = 1; i<n/2 + 1; i++) {
             if (frequencyData[i]>0) {
-                context.moveTo(x, height);
-                context.lineTo(x, height-frequencyData[i]);            
+                if (frequencyData[i] >= upperLimit) {
+                    drawRect(context, i * sliceWidth, sliceWidth, height, 'red');
+                }
+                else {
+                    var barHeightPercentage = frequencyData[i] / upperLimit;
+                    drawRect(context, i * sliceWidth, sliceWidth, barHeightPercentage * height, 'blue');
+                }           
             }
-            x += (sliceWidth);
         }
-        context.stroke();
     }
 
     componentDidUpdate() {
