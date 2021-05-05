@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { complex, exp, pi, pow, add, multiply, subtract, abs } from 'mathjs';
+import { complex, exp, pi, pow, add, multiply, subtract, abs, sin } from 'mathjs';
 
 import AudioVisualiser from './AudioVisualiser';
 
@@ -13,32 +13,54 @@ class AudioAnalyser extends Component {
 
 
     componentDidMount() {
+        // preparing datastream
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         this.analyser = this.audioContext.createAnalyser();
+
+        // determines the frequency bin count (frequencybincount = fftsize/2), ie the number of samples collected
+        this.analyser.fftSize = 16384/2;
+
+        // fs is sample rate (samples per second), n is number of samples collected (size of input array)
+        // df is difference in hz between freq[i] and freq[i+1]
+        this.fs = this.audioContext.sampleRate;
         this.n = this.analyser.frequencyBinCount;
-        this.dataArray = new Uint8Array(this.n);
+        this.df = this.fs/this.n;
+
+        // Array will include live data on the time domain spectrum.
+        this.dataTimeDomain = new Uint8Array(this.n);
+
+        // Get data
         this.source = this.audioContext.createMediaStreamSource(this.props.audio);
         this.source.connect(this.analyser);
         this.rafId = requestAnimationFrame(this.analyse);
     }
 
     analyse() {
-        this.analyser.getByteTimeDomainData(this.dataArray);
+
+        // collecting timeDomain audiodata
+        this.analyser.getByteTimeDomainData(this.dataTimeDomain);
+
+        // scalar depending on n (number of samples), for fft computation
         var w = exp(complex(0, -2*pi / this.n));
+    
+        // Own fft frequencies
+        var frequencies = fft(this.dataTimeDomain, w);
 
-        // frequencies
-        var frequencies = fft(this.dataArray, w);
 
-        var testArray = new Array(this.n)
-        for (var i =0; i< this.n; i++) {
+        var systemFreq = new Float32Array(this.n);
 
-            // power spectral density
+        this.analyser.getFloatFrequencyData(systemFreq);
+
+        for (var i = 0; i < this.n; i++) {
             var f = frequencies[i].re*frequencies[i].re + frequencies[i].im*frequencies[i].im;
-            testArray[i] = f/this.n;
+            frequencies[i] = abs(f)/this.n;
         }
 
-        this.setState({ frequencyData : testArray });
+        console.log(frequencies);
+    
+        this.setState({ frequencyData : frequencies });
         this.rafId = requestAnimationFrame(this.analyse);
+            
     }
 
     componentWillUnmount() {
@@ -49,7 +71,7 @@ class AudioAnalyser extends Component {
 
     render() {
         return (
-            <AudioVisualiser frequencyData={this.state.frequencyData} />
+            <AudioVisualiser frequencyData={this.state.frequencyData} df={this.df} />
         )
     }
 }
@@ -86,8 +108,8 @@ function dft(array, w) {
 function fft(array, w) {
     var n_array = array.length;
         
-    if (n_array <= 4) {
-        return dft(array, w)
+    if (n_array == 1) {
+        return array;
     } else {
         var array_odd = new Array(n_array/2);
         var array_even = new Array(n_array/2);
@@ -104,8 +126,8 @@ function fft(array, w) {
 
         var subFreqData = new Array(n_array);
         for (i = 0; i < n_array/2; i++) {
-            subFreqData[2*i] = add(even[i], multiply(pow(w, i), odd[i]));
-            subFreqData[2*i+ 1] = subtract(even[i], multiply(pow(w, i), odd[i]));
+            subFreqData[i] = add(even[i], multiply(pow(w, i), odd[i]));
+            subFreqData[n_array/2 + i] = subtract(even[i], multiply(pow(w, i), odd[i]));
         }
 
         return subFreqData;
