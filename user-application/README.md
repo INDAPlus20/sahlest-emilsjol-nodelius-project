@@ -9,8 +9,7 @@ https://nodejs.org/en/
 After repo is cloned, first navigate to `user-application`.
 
 Install requisites with `npm install` in the VSCode terminal.
-Run server with `npm start` in the VSCode integrated terminal.
-If you only want to start the front-end, use `npm run website`.
+Run front-end server with `npm start` in the VSCode integrated terminal.
 To connect the backend, start a new terminal of your choice and navigate to \sahlest-emilsjol-nodelius-project\go-backend and enter `go run .` in your terminal.
 
 If you're on windows, you can accomplish both at the same time by running `npm run windows` while in the user-application directory.
