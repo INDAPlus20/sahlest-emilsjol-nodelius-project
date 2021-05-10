@@ -20,8 +20,6 @@ class AudioVisualiser extends Component {
 
         var n = frequencyData.length;
 
-        console.log(frequencyData[0]);
-
         const drawRect = (ctx, pos, width, height, colour) => {
             ctx.fillStyle = colour;
             ctx.beginPath();
