@@ -14,7 +14,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
  
 func MessageList(w http.ResponseWriter, r *http.Request) {
     messages := Messages{
-        Message{Author: "Mikael", Text: "Hey Handsome, how are you doin?"},
+        Message{Author: "Mikael", Text: "Hey Handsome, how are you doin?", List: []string{"test", "test2"} },
         Message{Author: "Emil", Text: "Doing fine!"},
     }
 
