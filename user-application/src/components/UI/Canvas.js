@@ -10,8 +10,6 @@ const Canvas = (props) => {
   let framesPerSecond = 5;
   let runAnimation = true;
 
-  //Läste i en tutorial att det är bättre att skriva 'let arry = [];' än 'let arry = new Array(x);'
-  //Tänk att den här matrisen är fft-datan från backend
   function generateMatrix(n, m, ctx) {
     let mtrx = [];
     for (let i = 0; i < n; i++) {
@@ -24,7 +22,15 @@ const Canvas = (props) => {
   }
 
   function generateMatrixFromJson(data) {
-    console.log(data);
+    //console.log(data);
+    let mtrx = [];
+    for (let i = 0; i < data.length; i++) {
+      mtrx[i] = [];
+      for (let j = 0; j < data[i].length; j++) {
+        mtrx[i][j] = data[i][j];
+      }
+    }
+    return mtrx;
   }
 
   const drawRect = (ctx, pos, width, height) => {
@@ -43,23 +49,32 @@ const Canvas = (props) => {
   }
   
   //ogillar att mtrx måste tas som argument men behövs för att längden på staplarna ska följa canvas-storleken
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const animation = (ctx, frameCount, mtrx) => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     drawArray(ctx, frameCount, mtrx);
   };
 
+  
+  
   //körs varje gång animation, runAnimation eller framesPerSecond ändras
   //uppdaterar alltså sig själv vilket leder till animeringen
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
+    let matrixGotten = false;
     let frameCount = 0;
     let animationFrameId;
-    //matrisgenererandet behöver vara här för att följa storleken på canvas
-    getInfoFromGoBackend()
+    //placeholder matris
     let mtrx = generateMatrix(10, 10, context);
     
+    if (matrixGotten == false) {
+      mtrx = getMatrixFromGoBackend();
+      // varför är den här fel format???? den är response?????
+      console.log("matris från getMatrixFromGoBackend(): ");
+      console.log(mtrx);
+      matrixGotten = true;
+    }
+
     const render = () => {
       if (runAnimation) {
         setTimeout(() => {
@@ -76,13 +91,26 @@ const Canvas = (props) => {
     };
   }, [animation, runAnimation, framesPerSecond]);
 
-  const getInfoFromGoBackend = () => {
+  async function getMatrixFromGoBackend() {
     console.log("attempting to get matrix from back-end")
-    fetch("http://localhost:8080/matrix", {
+    let response = await fetch("http://localhost:8080/matrix");
+    if (response.ok) {
+      console.log("reponse ok");
+      let data = await response.json();
+      // den är rätt format här??? vad händer???
+      console.log("generateMatrixFromJson(data) som returnas i getMatrixFromGoBackend():");
+      console.log(generateMatrixFromJson(data));
+      return generateMatrixFromJson(data);
+    } else {
+      alert("HTTP-Error: no response when fetching matrix");
+    }
+    return;
+    /*fetch("http://localhost:8080/matrix", {
     })
     .then(response => response.json())
-    .then(data => generateMatrixFromJson(data));
+    .then(data => generateMatrixFromJson(data));*/
   }
+
   return <canvas ref={canvasRef} width="1200" height="650" {...props} />;
 };
 
