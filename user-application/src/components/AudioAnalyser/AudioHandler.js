@@ -1,27 +1,20 @@
 
 function AudioHandler(dataTimeDomain) {
 
+    var handledAudio;
+
     const sendAudioToGoServer = () => {
-        fetch("http://localhost:8080/send", {
-          method : 'POST',
+        fetch("http://localhost:8080/handleAudio", {
+          method: "POST",
           body: dataTimeDomain
         })
         .then(response => response.json())
-        .then(data => {
-
-            var thing = JSON.stringify(data);
-            
-            
-
-            console.log("Request succeded with JSON respons: ", thing)
-
-        })
+        .then(data => handledAudio = data)
     }
 
     sendAudioToGoServer();
-    
-
-    return dataTimeDomain
+  
+    return handledAudio
 }
 
 export default AudioHandler;

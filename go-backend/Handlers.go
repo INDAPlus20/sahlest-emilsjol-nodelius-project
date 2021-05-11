@@ -35,17 +35,21 @@ func ShowMessages(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Show Messages:", messageId)
 }
 
-func Sending(w http.ResponseWriter, r *http.Request) {
-	defer r.Body.Close()
-
+func HandleAudio(w http.ResponseWriter, r *http.Request) {
 	r.Header.Set("Access-Control-Allow-Origin", "*")
 	body, _ := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
 
-	w.Header().Set("Content-Type", "application/json")
+	data := []int{}
+	for _, v := range body {
+		data = append(data, int(v))
+	}
+
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 
-	if err := json.NewEncoder(w).Encode(body); err != nil {
+	if err := json.NewEncoder(w).Encode(data); err != nil {
 		panic(err)
 	}
 

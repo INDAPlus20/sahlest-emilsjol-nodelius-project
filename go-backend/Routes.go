@@ -49,9 +49,9 @@ var routes = Routes{
 		ShowMessages,
 	},
 	Route{
-		"Send",
+		"HandleAudio",
 		"POST",
-		"/send",
-		Sending,
+		"/handleAudio",
+		HandleAudio,
 	},
 }
