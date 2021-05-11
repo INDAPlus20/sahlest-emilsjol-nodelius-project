@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import AudioVisualiser from './AudioVisualiser';
-import AudioHandler from './AudioHandler';
+import BackendAudioHandler from './BackendAudioHandler';
 
 
 class AudioAnalyser extends Component {
@@ -35,14 +35,16 @@ class AudioAnalyser extends Component {
         this.rafId = requestAnimationFrame(this.analyse);
     }
 
-    analyse() {
+    async analyse() {
 
         // collecting timeDomain audiodata
         this.analyser.getByteTimeDomainData(this.dataTimeDomain);
 
-        AudioHandler(this.dataTimeDomain);
+        const handledAudio = await BackendAudioHandler(this.dataTimeDomain);
 
-        this.setState({ frequencyData : this.dataTimeDomain });
+        console.log(handledAudio)
+
+        this.setState({ frequencyData : this.dataTimeDomain});
         this.rafId = requestAnimationFrame(this.analyse);
             
     }
@@ -55,7 +57,7 @@ class AudioAnalyser extends Component {
 
     render() {
         return (
-            <AudioVisualiser frequencyData={this.state.frequencyData} df={this.df} />
+            <AudioVisualiser frequencyData={this.state.frequencyData} />
         )
     }
 }

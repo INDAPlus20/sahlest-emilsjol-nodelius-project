@@ -45,11 +45,13 @@ func HandleAudio(w http.ResponseWriter, r *http.Request) {
 		data = append(data, int(v))
 	}
 
+	audio := AudioData{List: data}
+
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 
-	if err := json.NewEncoder(w).Encode(data); err != nil {
+	if err := json.NewEncoder(w).Encode(audio); err != nil {
 		panic(err)
 	}
 
