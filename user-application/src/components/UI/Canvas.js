@@ -23,6 +23,10 @@ const Canvas = (props) => {
     return mtrx;
   }
 
+  function generateMatrixFromJson(data) {
+    console.log(data);
+  }
+
   const drawRect = (ctx, pos, width, height) => {
     ctx.fillStyle = "#000000";
     ctx.beginPath();
@@ -53,7 +57,9 @@ const Canvas = (props) => {
     let frameCount = 0;
     let animationFrameId;
     //matrisgenererandet behöver vara här för att följa storleken på canvas
+    getInfoFromGoBackend()
     let mtrx = generateMatrix(10, 10, context);
+    
     const render = () => {
       if (runAnimation) {
         setTimeout(() => {
@@ -70,6 +76,13 @@ const Canvas = (props) => {
     };
   }, [animation, runAnimation, framesPerSecond]);
 
+  const getInfoFromGoBackend = () => {
+    console.log("attempting to get matrix from back-end")
+    fetch("http://localhost:8080/matrix", {
+    })
+    .then(response => response.json())
+    .then(data => generateMatrixFromJson(data));
+  }
   return <canvas ref={canvasRef} width="1200" height="650" {...props} />;
 };
 

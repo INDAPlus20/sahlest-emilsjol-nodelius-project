@@ -14,7 +14,7 @@ class AudioVisualiser extends Component {
         const width = canvas1.width;
         const context = canvas1.getContext('2d');
         const sliceWidth = (width * 2.0)/frequencyData.length;
-        const upperLimit = 2500;
+        const upperLimit = 5;
 
         context.clearRect(0, 0, width, height);
 

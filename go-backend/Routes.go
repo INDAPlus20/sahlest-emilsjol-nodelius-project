@@ -37,6 +37,12 @@ var routes = Routes{
         Index,
     },
     Route{
+        "Matrix",
+        "GET",
+        "/matrix",
+        Matrix,
+    },
+    Route{
         "MessageList",
         "GET",
         "/messages",
