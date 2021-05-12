@@ -6,9 +6,14 @@ https://reactjs.org/
 To run a test server, make sure you have Node.js and npm on your device
 https://nodejs.org/en/
 
-After repo is cloned, start by installing with `npm install`
+After repo is cloned, first navigate to `user-application`.
 
-To run local server, run `npm start`, accessed by default `localhost:3000` in browser.
+Install requisites with `npm install` in the VSCode terminal.
+Run front-end server with `npm start` in the VSCode integrated terminal.
+To connect the backend, start a new terminal of your choice and navigate to \sahlest-emilsjol-nodelius-project\go-backend and enter `go run .` in your terminal.
+
+If you're on windows, you can accomplish both at the same time by running `npm run windows` while in the user-application directory.
+
 The page will reload if you make edits.
 
-To exit, use `ctrl + c` in terminal
+To exit, use `ctrl + c` in both terminals.
