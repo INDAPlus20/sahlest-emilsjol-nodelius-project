@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, } from "react";
 
 /*
 This component draws a canvas using html canvas tag.
@@ -7,22 +7,11 @@ It's based on this article:  https://medium.com/@pdx.lucasm/canvas-with-react-js
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
+  const mtrxRef = useRef(0);
   let framesPerSecond = 5;
-  let runAnimation = true;
-
-  function generateMatrix(n, m, ctx) {
-    let mtrx = [];
-    for (let i = 0; i < n; i++) {
-      mtrx[i] = [];
-      for (let j = 0; j < m; j++) {
-        mtrx[i][j] = Math.floor(Math.random()*(ctx.canvas.height));
-      }
-    }
-    return mtrx;
-  }
+  let runAnimation = false;
 
   function generateMatrixFromJson(data) {
-    //console.log(data);
     let mtrx = [];
     for (let i = 0; i < data.length; i++) {
       mtrx[i] = [];
@@ -30,7 +19,7 @@ const Canvas = (props) => {
         mtrx[i][j] = data[i][j];
       }
     }
-    return mtrx;
+    mtrxRef.current = mtrx;
   }
 
   const drawRect = (ctx, pos, width, height) => {
@@ -44,7 +33,7 @@ const Canvas = (props) => {
     let currentRow = frameCount % mtrx.length;
     let width = ctx.canvas.width / mtrx[currentRow].length;
     for(const [i, barHeight] of mtrx[currentRow].entries()){
-      drawRect(ctx, i*width, width, barHeight)
+      drawRect(ctx, i*width, width, barHeight * 650)
     }
   }
   
@@ -53,33 +42,36 @@ const Canvas = (props) => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     drawArray(ctx, frameCount, mtrx);
   };
+  
+  //sker en gång, notera tomma klamrarna i slutet
+  useEffect(() => {
 
-  
-  
+      fetch("http://localhost:8080/matrix")
+        .then(response => response.json())
+        .then(data => generateMatrixFromJson(data))
+        .finally(runAnimation = true)
+        .catch(error => alert(error));
+
+  }, []); // <--
+
+  //för säkerhets skull
+  let mtrxTemp = [[1, 1], [1, 1]];
+  mtrxRef.current = mtrxTemp;
+
   //körs varje gång animation, runAnimation eller framesPerSecond ändras
   //uppdaterar alltså sig själv vilket leder till animeringen
+  //notera icke-tomma klamrar i slutet
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    let matrixGotten = false;
     let frameCount = 0;
     let animationFrameId;
-    //placeholder matris
-    let mtrx = generateMatrix(10, 10, context);
-    
-    if (matrixGotten == false) {
-      mtrx = getMatrixFromGoBackend();
-      // varför är den här fel format???? den är response?????
-      console.log("matris från getMatrixFromGoBackend(): ");
-      console.log(mtrx);
-      matrixGotten = true;
-    }
 
     const render = () => {
       if (runAnimation) {
         setTimeout(() => {
           frameCount++;
-          animation(context, frameCount, mtrx);
+          animation(context, frameCount, mtrxRef.current);
           animationFrameId = window.requestAnimationFrame(render);
         }, 1000 / framesPerSecond);
       }
@@ -89,27 +81,7 @@ const Canvas = (props) => {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [animation, runAnimation, framesPerSecond]);
-
-  async function getMatrixFromGoBackend() {
-    console.log("attempting to get matrix from back-end")
-    let response = await fetch("http://localhost:8080/matrix");
-    if (response.ok) {
-      console.log("reponse ok");
-      let data = await response.json();
-      // den är rätt format här??? vad händer???
-      console.log("generateMatrixFromJson(data) som returnas i getMatrixFromGoBackend():");
-      console.log(generateMatrixFromJson(data));
-      return generateMatrixFromJson(data);
-    } else {
-      alert("HTTP-Error: no response when fetching matrix");
-    }
-    return;
-    /*fetch("http://localhost:8080/matrix", {
-    })
-    .then(response => response.json())
-    .then(data => generateMatrixFromJson(data));*/
-  }
+  }, [animation, runAnimation, framesPerSecond]); // <-- icke-tomma klamrar
 
   return <canvas ref={canvasRef} width="1200" height="650" {...props} />;
 };
