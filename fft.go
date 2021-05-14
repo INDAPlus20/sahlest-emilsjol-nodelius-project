@@ -7,8 +7,8 @@ import (
 )
 
 func power_off(w complex128, i int) complex128 {
-	var pow complex128
-	for ; i > 0; i-- {
+	pow := w
+	for ; i > 1; i-- {
 		pow = pow * w
 	}
 
@@ -16,29 +16,37 @@ func power_off(w complex128, i int) complex128 {
 
 }
 
-func fft(array []complex128, w complex128) []complex128 {
-	var n = len(array)
+func fft(array []float64) []complex128 {
+	n := len(array)
 
 	if n == 1 {
-		return array
+		return []complex128{complex(float64(array[0]), 0)}
 	} else {
-		a_odd := []complex128{}
-		a_even := []complex128{}
+
+		a_odd := make([]float64, n/2)
+		a_even := make([]float64, n/2)
 
 		for i := 0; i < n/2; i++ {
 			a_odd[i] = array[2*i+1]
 			a_even[i] = array[2*i]
 		}
 
-		w_2 := w * w
+		Y_even := fft(a_even)
+		Y_odd := fft(a_odd)
 
-		even := fft(a_even, w_2)
-		odd := fft(a_odd, w_2)
+		subData := make([]complex128, n)
 
-		subData := []complex128{}
+		var c float64 = (-2.0 * math.Pi) / float64(n)
+		Wn := cmplx.Exp(complex(0, c))
+		W := complex(1, 0)
 		for i := 0; i < n/2; i++ {
-			subData[i] = even[i] + power_off(w, i)*odd[i]
-			subData[n/2+i] = even[i] - power_off(w, i)*odd[i]
+			p := Y_even[i]
+			q := W * Y_odd[i]
+
+			subData[i] = p + q
+			subData[n/2+i] = p - q
+
+			W = W * Wn
 		}
 
 		return subData
@@ -47,17 +55,26 @@ func fft(array []complex128, w complex128) []complex128 {
 
 func main() {
 
-	array := []int{2, 3, 5, 7, 11, 13}
-	n := len(array)
+	dt := 0.001
+	array := make([]float64, int(1/dt))
 
-	c_array := []complex128{}
-	for i := 0; i < n; i++ {
-		c_array[i] = complex128(float64(array[i]), 0)
+	for i := float64(0); i <= 1; {
+		array[int(i/dt)] = math.Sin(2 * math.Pi * 50 * i)
+		i = i + dt
 	}
 
-	w := cmplx.Exp(complex(0, -2.0*math.Pi/float64(n)))
+	output := fft(array)
+	n := len(output)
+	fmt.Println(output[0])
 
-	output := fft(c_array, w)
+	PSD := make([]float64, n/2)
+	for i := 0; i < n/2; i++ {
+		PSD[i] = real(output[i]*cmplx.Conj(output[i])) / float64(n)
 
-	fmt.Println(output)
+		if PSD[i] > 1 {
+			fmt.Printf("This is value %f at frequency %d\n", PSD[i], i+1)
+		}
+	}
+
+	fmt.Println(PSD[0])
 }
