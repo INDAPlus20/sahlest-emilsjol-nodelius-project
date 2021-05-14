@@ -18,7 +18,7 @@ class AudioAnalyser extends Component {
         this.analyser = this.audioContext.createAnalyser();
 
         // determines the frequency bin count (frequencybincount = fftsize/2), ie the number of samples collected
-        this.analyser.fftSize = 16384/2;
+        this.analyser.fftSize = 16384/8;
 
         // fs is sample rate (samples per second), n is number of samples collected (size of input array)
         // df is difference in hz between freq[i] and freq[i+1]
@@ -44,7 +44,7 @@ class AudioAnalyser extends Component {
 
         console.log(handledAudio)
 
-        this.setState({ frequencyData : this.dataTimeDomain});
+        this.setState({ frequencyData : handledAudio});
         this.rafId = requestAnimationFrame(this.analyse);
             
     }

@@ -1,5 +1,5 @@
 package main
 
 type AudioData struct {
-	List []int `json:"list"`
+	List []float64 `json:"list"`
 }

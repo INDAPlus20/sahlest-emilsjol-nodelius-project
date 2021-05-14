@@ -40,12 +40,13 @@ func HandleAudio(w http.ResponseWriter, r *http.Request) {
 	body, _ := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 
-	data := []int{}
+	data := []float64{}
 	for _, v := range body {
-		data = append(data, int(v))
+		data = append(data, float64(v))
 	}
+	PSD := powerSpectrum(fft(data))
 
-	audio := AudioData{List: data}
+	audio := AudioData{List: PSD[0 : len(PSD)/2]}
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
