@@ -14,18 +14,19 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func MessageList(w http.ResponseWriter, r *http.Request) {
-	messages := Messages{
-		Message{Author: "Mikael", Text: "Hey Handsome, how are you doin?"},
-		Message{Author: "Emil", Text: "Doing fine!"},
-	}
+    messages := Messages{
+        Message{Author: "Mikael", Text: "Hey Handsome, how are you doin?", List: []string{"test", "test2"} },
+        Message{Author: "Emil", Text: "Doing fine!"},
+    }
 
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.WriteHeader(http.StatusOK)
+    w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+    w.Header().Set("Access-Control-Allow-Origin", "*")
+    w.WriteHeader(http.StatusOK)
+ 
+    if err := json.NewEncoder(w).Encode(messages); err != nil {
+        panic(err)
+    }
 
-	if err := json.NewEncoder(w).Encode(messages); err != nil {
-		panic(err)
-	}
 }
 
 // Not implemented....
