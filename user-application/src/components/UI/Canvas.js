@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, } from "react";
+import React, { useRef, useEffect, useState, } from "react";
 
 /*
 This component draws a canvas using html canvas tag.
@@ -9,7 +9,8 @@ const Canvas = (props) => {
   const canvasRef = useRef(null);
   const mtrxRef = useRef(0);
   let framesPerSecond = 5;
-  let runAnimation = false;
+  // let runAnimation = false;
+  const [runAnimation, runAnimationSetstate] = useState(false)
 
   function generateMatrixFromJson(data) {
     let mtrx = [];
@@ -49,7 +50,7 @@ const Canvas = (props) => {
       fetch("http://localhost:8080/matrix")
         .then(response => response.json())
         .then(data => generateMatrixFromJson(data))
-        .finally(runAnimation = true)
+        .finally(runAnimationSetstate(true))
         .catch(error => alert(error));
 
   }, []); // <--
