@@ -36,13 +36,6 @@ const Canvas = (props) => {
       .catch((error) => alert(error));
   }, []); // <--
 
-  //för säkerhets skull
-  let mtrxTemp = [
-    [1, 1],
-    [1, 1],
-  ];
-  mtrxRef.current = mtrxTemp;
-
   /**
    * Animation method to rerender the canvas 
    */
