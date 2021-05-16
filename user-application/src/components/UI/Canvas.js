@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 
-/*
-This component draws a canvas using html canvas tag.
-It's based on this article:  https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258#_=_
+/** 
+ * This component draws a canvas using html canvas tag. 
+ * It's based on this article:  https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258#_=_ 
+ * 
 */
 
 const Canvas = (props) => {
@@ -24,7 +25,9 @@ const Canvas = (props) => {
   }
 
 
-  //sker en gång, notera tomma klamrarna i slutet
+  /**
+   * Fetch function when component mounts
+   */
   useEffect(() => {
     fetch("http://localhost:8080/matrix")
       .then((response) => response.json())
@@ -40,16 +43,15 @@ const Canvas = (props) => {
   ];
   mtrxRef.current = mtrxTemp;
 
-  //körs varje gång animation, runAnimation eller framesPerSecond ändras
-  //uppdaterar alltså sig själv vilket leder till animeringen
-  //notera icke-tomma klamrar i slutet
+  /**
+   * Animation method to rerender the canvas 
+   */
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     let frameCount = 0;
     let animationFrameId;
 
-    //ogillar att mtrx måste tas som argument men behövs för att längden på staplarna ska följa canvas-storleken
     const animation = (ctx, frameCount, mtrx) => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       drawArray(ctx, frameCount, mtrx);
