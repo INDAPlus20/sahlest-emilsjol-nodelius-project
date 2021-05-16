@@ -19,8 +19,8 @@ function App() {
     console.log("we wqill now call the server 8080")
     fetch("http://localhost:8080/messages", {
     })
-    .then(response => response.json())
-    .then(data => console.log(data));
+    .then(response => response.json());
+    //.then(data => console.log(data));
   }
 
   return (
