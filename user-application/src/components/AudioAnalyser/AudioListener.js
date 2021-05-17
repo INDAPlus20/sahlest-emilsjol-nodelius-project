@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AudioAnalyser from './FFT';
+import AudioHandler from './FrontendAudioHandler';
 
 import './Audio.css'
 
@@ -41,7 +41,7 @@ class AudioListener extends Component {
                         {this.state.audio ? 'Stop recording' : 'Start recording'}
                     </button>
                 </div>
-                {this.state.audio ? <AudioAnalyser audio= {this.state.audio}/> : ""}
+                {this.state.audio ? <AudioHandler audio= {this.state.audio}/> : ""}
             </div>
         );    
     }

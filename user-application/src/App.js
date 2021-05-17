@@ -11,12 +11,13 @@ import { useEffect } from "react";
 function App() {
 
   useEffect(() => {
+    console.log("we will now call the server 8080")
     getInfoFromGoServer()
 
   }, [])
 
+
   const getInfoFromGoServer = () => {
-    console.log("we wqill now call the server 8080")
     fetch("http://localhost:8080/messages", {
     })
     .then(response => response.json());
