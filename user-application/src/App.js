@@ -20,8 +20,8 @@ function App() {
   const getInfoFromGoServer = () => {
     fetch("http://localhost:8080/messages", {
     })
-    .then(response => response.json())
-    .then(data => console.log(data));
+    .then(response => response.json());
+    //.then(data => console.log(data));
   }
 
   return (

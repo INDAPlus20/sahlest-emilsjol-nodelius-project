@@ -1,27 +1,55 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
-/*
-This component draws a canvas using html canvas tag.
-It's based on this article:  https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258#_=_
+/** 
+ * This component draws a canvas using html canvas tag. 
+ * It's based on this article:  https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258#_=_ 
+ * 
 */
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
+  const mtrxRef = useRef(0);
   let framesPerSecond = 5;
-  let runAnimation = true;
+  // let runAnimation = false;
+  const [runAnimation, runAnimationSetstate] = useState(false);
 
-  //Läste i en tutorial att det är bättre att skriva 'let arry = [];' än 'let arry = new Array(x);'
-  //Tänk att den här matrisen är fft-datan från backend
-  function generateMatrix(n, m, ctx) {
+  function generateMatrixFromJson(data) {
     let mtrx = [];
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < data.length; i++) {
       mtrx[i] = [];
-      for (let j = 0; j < m; j++) {
-        mtrx[i][j] = Math.floor(Math.random()*(ctx.canvas.height));
+      for (let j = 0; j < data[i].length; j++) {
+        mtrx[i][j] = data[i][j];
       }
     }
-    return mtrx;
+    mtrxRef.current = mtrx;
   }
+
+
+  /**
+   * Fetch function when component mounts
+   */
+  useEffect(() => {
+    fetch("http://localhost:8080/matrix")
+      .then((response) => response.json())
+      .then((data) => generateMatrixFromJson(data))
+      .finally(runAnimationSetstate(true))
+      .catch((error) => alert(error));
+  }, []); // <--
+
+  /**
+   * Animation method to rerender the canvas 
+   */
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    let frameCount = 0;
+    let animationFrameId;
+
+    const animation = (ctx, frameCount, mtrx) => {
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      drawArray(ctx, frameCount, mtrx);
+    };
+
 
   const drawRect = (ctx, pos, width, height) => {
     ctx.fillStyle = "#000000";
@@ -33,32 +61,16 @@ const Canvas = (props) => {
   const drawArray = (ctx, frameCount, mtrx) => {
     let currentRow = frameCount % mtrx.length;
     let width = ctx.canvas.width / mtrx[currentRow].length;
-    for(const [i, barHeight] of mtrx[currentRow].entries()){
-      drawRect(ctx, i*width, width, barHeight)
+    for (const [i, barHeight] of mtrx[currentRow].entries()) {
+      drawRect(ctx, i * width, width, barHeight * 650);
     }
-  }
-  
-  //ogillar att mtrx måste tas som argument men behövs för att längden på staplarna ska följa canvas-storleken
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const animation = (ctx, frameCount, mtrx) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    drawArray(ctx, frameCount, mtrx);
   };
 
-  //körs varje gång animation, runAnimation eller framesPerSecond ändras
-  //uppdaterar alltså sig själv vilket leder till animeringen
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-    let frameCount = 0;
-    let animationFrameId;
-    //matrisgenererandet behöver vara här för att följa storleken på canvas
-    let mtrx = generateMatrix(10, 10, context);
     const render = () => {
       if (runAnimation) {
         setTimeout(() => {
           frameCount++;
-          animation(context, frameCount, mtrx);
+          animation(context, frameCount, mtrxRef.current);
           animationFrameId = window.requestAnimationFrame(render);
         }, 1000 / framesPerSecond);
       }
@@ -68,7 +80,7 @@ const Canvas = (props) => {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [animation, runAnimation, framesPerSecond]);
+  }, [runAnimation, framesPerSecond]); // <-- icke-tomma klamrar
 
   return <canvas ref={canvasRef} width="1200" height="650" {...props} />;
 };
