@@ -9,39 +9,47 @@ class AudioListener extends Component {
       this.state = {
         audio : null
       }
-      this.toggleMicrophone = this.toggleMicrophone.bind(this)
+      this.toggleMicrophone = this.toggleMicrophone.bind(this);
+      this.start = false;
+      this.toneNow = 0;
     }
 
+
     async getMicrophone() {
-        const audio = await navigator.mediaDevices.getUserMedia( {
+        const setaudio = await navigator.mediaDevices.getUserMedia( {
             audio : true,
             video : false
         });
-        this.setState({ audio });
+        this.start = true;
+        this.setState({ audio : setaudio});
     }
 
     stopMicrophone() {
         this.state.audio.getAudioTracks().forEach(track => track.stop());
         this.setState({ audio : null });
+        this.start = false;
     }
 
     toggleMicrophone() {
-        if (this.state.audio) {
+        if (this.start) {
             this.stopMicrophone();
         } else {
             this.getMicrophone();
         }
     }
 
+  
+
+
     render() {
         return (
             <div>
                 <div className="audioListener">
                     <button className="micbutton" id="micButton" onClick={this.toggleMicrophone}>
-                        {this.state.audio ? 'Stop recording' : 'Start recording'}
+                        {this.start ? 'Stop recording' : 'Start recording'}
                     </button>
                 </div>
-                {this.state.audio ? <AudioHandler audio= {this.state.audio}/> : ""}
+                {this.start ? <AudioHandler audio = {this.state.audio}/> : null}
             </div>
         );    
     }
