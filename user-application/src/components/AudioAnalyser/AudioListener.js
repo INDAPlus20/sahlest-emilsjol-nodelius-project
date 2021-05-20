@@ -7,8 +7,7 @@ class AudioListener extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        audio : null, 
-        tone : 1
+        audio : null
       }
       this.toggleMicrophone = this.toggleMicrophone.bind(this);
       this.start = false;
