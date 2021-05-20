@@ -53,7 +53,7 @@ After allowing it to finish, you are now ready to launch the website locally, as
 
 Two terminals will be required: one for the front-end, one for the back-end.
 
-To start the front-end, navigate to /project/user-application/ and enter: ```npm run```
+To start the front-end, navigate to /project/user-application/ and enter: ```npm start```
 If this is the first time per session the front-end is started, it will take some time.
 Once it completes, your default browser will open to the page http://localhost:3000/
 Any changes made and saved to the source code will be automatically compiled and updated, visible in your browser.
