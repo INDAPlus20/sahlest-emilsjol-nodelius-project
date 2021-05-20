@@ -13,7 +13,7 @@
 
 .micbutton {
     box-shadow: 0 2px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
-    background-color: #ff0000; /* Green */
+    background-color: #ff0000;
     border: none;
     color: rgb(255, 255, 255);
     padding: 10px 12px;
@@ -22,6 +22,39 @@
     display: inline-block;
     font-size: 12px;
     border-radius: 15em;
+}
+
+.pressedtonebutton {
+    box-shadow: 0 2px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
+    background-color: #ff0000;
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 10px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 15em;
+
+}
+
+.tonebutton {
+    box-shadow: 0 2px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
+    background-color: rgb(253, 119, 119);
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 10px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 15em;
+
+}
+.tonebutton:hover {
+    background:#ff0000;
+    color: rgb(255, 255, 255);
+
 }
 
 .micbutton:hover {

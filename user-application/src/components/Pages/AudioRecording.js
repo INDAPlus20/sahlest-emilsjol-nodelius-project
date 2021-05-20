@@ -4,7 +4,7 @@ import AudioListener from '../AudioAnalyser/AudioListener'
 function AudioRecording() {
     return (
         <div>
-            <h1>Here you can analyse your voice!</h1>   
+            <h1>Bad quitar tuner!</h1>   
             <AudioListener/>
         </div>
     )
