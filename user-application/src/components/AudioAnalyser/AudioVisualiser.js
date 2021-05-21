@@ -76,6 +76,15 @@ class AudioVisualiser extends Component {
         } else if (freq == 246.94) {
           drawRect(context, freq, sliceWidth, height, '#B5CDC1');
           drawRect(context, 493.88, sliceWidth, height, '#B5CDC1');
+        } else if (freq == 110.00) {
+          drawRect(context, freq, sliceWidth, height, '#B5CDC1');
+          drawRect(context, 220, sliceWidth, height, '#B5CDC1');
+          drawRect(context, 440, sliceWidth, height, '#B5CDC1');
+
+        } else if (freq == 82.41) {
+          drawRect(context, freq, sliceWidth, height, '#B5CDC1');
+          drawRect(context, 164.81, sliceWidth, height, '#B5CDC1');
+          
         } else {
           drawRect(context, freq, sliceWidth, height, '#B5CDC1');
         }
