@@ -45,7 +45,6 @@ class AudioAnalyser extends Component {
 
     async analyse() {
 
-        console.log(this.state.tone);
         // collecting timeDomain audiodata
         this.analyser.getByteTimeDomainData(this.dataTimeDomain);
 

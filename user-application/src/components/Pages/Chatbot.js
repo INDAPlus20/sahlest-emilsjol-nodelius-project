@@ -2,22 +2,33 @@ import React, { useState } from 'react'
 
 
 function Chatbot() {
-  const [value, setValue] = useState('');
+  const [input, setValue] = useState('');
+  const [output, setSecondValue] = useState('');
 
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      alert('You wrote: ' + value)
-      setValue('')
+
+  const handleSubmit = (userInput) => {
+
+    fetch("http://localhost:8080/chatBot", {
+      method: "POST",
+      body: userInput
+    })
+    .then(response => response.json())
+    .then(data => setSecondValue(data.text));
+
+    setValue(userInput);
   }
 
+
+  
+
   return (
-      <form onSubmit={handleSubmit}>
+      <form>
           <label>
               Write to buddy: <br/>
               <input
                 type="text"
-                value={value}
-                onChange={e=>setValue(e.target.value)}
+                value={input}
+                onChange={e=>handleSubmit(e.target.value)}
               />
           </label>
           <input
@@ -26,7 +37,7 @@ function Chatbot() {
           /> <br/>
           <br/>
 
-          <label>{value}</label>
+          <label>{output}</label>
       </form>
   );
 }

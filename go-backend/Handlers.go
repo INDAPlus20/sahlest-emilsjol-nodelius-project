@@ -77,3 +77,22 @@ func HandleAudio(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
+
+func ChatBot(w http.ResponseWriter, r *http.Request) {
+
+	r.Header.Set("Access-Control-Allow-Origin", "*")
+	body, _ := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+
+	rovar := toRovarsprak(string(body))
+
+	data := StringData{Text: rovar}
+
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.WriteHeader(http.StatusOK)
+
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		panic(err)
+	}
+}

@@ -53,11 +53,17 @@ var routes = Routes{
 		"POST",
 		"/handleAudio",
 		HandleAudio,
-  },
-  Route{
-    "Matrix",
-    "GET",
-    "/matrix",
-    Matrix,
-  },
+	},
+	Route{
+		"Matrix",
+		"GET",
+		"/matrix",
+		Matrix,
+	},
+	Route{
+		"ChatBot",
+		"POST",
+		"/chatBot",
+		ChatBot,
+	},
 }
