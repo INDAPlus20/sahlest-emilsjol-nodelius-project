@@ -68,16 +68,16 @@ class AudioVisualiser extends Component {
           };
 
         if (freq == 196.00 ) {
-          drawRect(context, freq, sliceWidth, height, 'rgb(253, 119, 119)');
-          drawRect(context, 392.00, sliceWidth, height, 'rgb(253, 119, 119)');
+          drawRect(context, freq, sliceWidth, height, '#B5CDC1');
+          drawRect(context, 392.00, sliceWidth, height, '#B5CDC1');
         } else if (freq  == 146.83) {
-          drawRect(context, freq, sliceWidth, height, 'rgb(253, 119, 119)');
-          drawRect(context, 293.66, sliceWidth, height, 'rgb(253, 119, 119)');
+          drawRect(context, freq, sliceWidth, height, '#B5CDC1');
+          drawRect(context, 293.66, sliceWidth, height, '#B5CDC1');
         } else if (freq == 246.94) {
-          drawRect(context, freq, sliceWidth, height, 'rgb(253, 119, 119)');
-          drawRect(context, 493.88, sliceWidth, height, 'rgb(253, 119, 119)');
+          drawRect(context, freq, sliceWidth, height, '#B5CDC1');
+          drawRect(context, 493.88, sliceWidth, height, '#B5CDC1');
         } else {
-          drawRect(context, freq, sliceWidth, height, 'rgb(253, 119, 119)');
+          drawRect(context, freq, sliceWidth, height, '#B5CDC1');
         }
 
         drawRect(context, width - sliceWidth, sliceWidth, height, 'gray');   
@@ -104,7 +104,7 @@ class AudioVisualiser extends Component {
       }
 
     render() {
-        return <canvas width="512" height="500" ref={this.canvas}/>
+        return <canvas width="512" height="400" ref={this.canvas}/>
     }
 }
 
