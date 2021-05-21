@@ -26,7 +26,7 @@ class AudioAnalyser extends Component {
 
         // determines the frequency bin count (frequencybincount = fftsize/2), ie the number of samples collected
         // with 1024 datapoints we can determine frequencies ranging from 1-512.
-        this.analyser.fftSize = 2048;
+        this.analyser.fftSize = 2048*16;
 
         // fs is sample rate (samples per second), n is number of samples collected (size of input array)
         // df is difference in hz between freq[i] and freq[i+1]
@@ -121,7 +121,7 @@ class AudioAnalyser extends Component {
                     <button className={classBtn_tva}  id="a" onClick={() => this.handleClick(2)}>B</button>
                     <button className={classBtn_ett} id="e2" onClick={() => this.handleClick(1)}>E - high</button>
             </div>
-            <AudioVisualiser frequencyData={this.state.frequencyData} tone = {this.state.tone} />
+            <AudioVisualiser frequencyData={this.state.frequencyData} tone = {this.state.tone} df={this.df} />
             </div>
         )
     }

@@ -42,7 +42,7 @@ class AudioVisualiser extends Component {
     }
 
     draw() {
-        const {frequencyData, tone} = this.props;
+        const {frequencyData, tone, df} = this.props;
         const freq = this.freqOftone(tone);
 
         const canvas1 = this.canvas.current;
@@ -50,8 +50,13 @@ class AudioVisualiser extends Component {
         const width = canvas1.width;
         const context = canvas1.getContext('2d');
         const n = frequencyData.length;
-        const sliceWidth = width/n;
-        const upperLimit = 10000;
+        const sliceWidth = df;
+        const upperLimit = 1500000;
+
+
+
+
+        console.log(df)
 
         context.clearRect(0, 0, width, height);
 
@@ -62,19 +67,35 @@ class AudioVisualiser extends Component {
             ctx.fill();
           };
 
-        drawRect(context, freq * sliceWidth, sliceWidth, height, 'green');
-        drawRect(context, width - sliceWidth, sliceWidth, height, 'gray');   
-        drawRect(context, 0, sliceWidth, height, 'gray');       
+        if (freq == 196.00 ) {
+          drawRect(context, freq, sliceWidth, height, 'rgb(253, 119, 119)');
+          drawRect(context, 392.00, sliceWidth, height, 'rgb(253, 119, 119)');
+        } else if (freq  == 146.83) {
+          drawRect(context, freq, sliceWidth, height, 'rgb(253, 119, 119)');
+          drawRect(context, 293.66, sliceWidth, height, 'rgb(253, 119, 119)');
+        } else if (freq == 246.94) {
+          drawRect(context, freq, sliceWidth, height, 'rgb(253, 119, 119)');
+          drawRect(context, 493.88, sliceWidth, height, 'rgb(253, 119, 119)');
+        } else {
+          drawRect(context, freq, sliceWidth, height, 'rgb(253, 119, 119)');
+        }
 
-        for (var i = 1; i<n + 1; i++) {
+        drawRect(context, width - sliceWidth, sliceWidth, height, 'gray');   
+        drawRect(context, 0, sliceWidth, height, 'gray');    
+
+
+        console.log(n)
+
+        for (var i = 1; i<=512/df; i++) {
             var barHeightPercentage = frequencyData[i] / upperLimit;
+
             var color;
-            if (freq !== 0 && (freq < i + 10 && freq > i - 10)) {
+            if (freq !== 0 && (freq < i * df + 2*df && freq > i*df - 2*df)) {
                 color = 'green';
             } else {
                 color = 'blue';
             }
-            drawRect(context, i * sliceWidth, sliceWidth, barHeightPercentage * height, color);       
+            drawRect(context, i*sliceWidth, sliceWidth, barHeightPercentage * height, color);       
         }
     }
 
@@ -83,7 +104,7 @@ class AudioVisualiser extends Component {
       }
 
     render() {
-        return <canvas width="1024" height="500" ref={this.canvas}/>
+        return <canvas width="512" height="500" ref={this.canvas}/>
     }
 }
 
